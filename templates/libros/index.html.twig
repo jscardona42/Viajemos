@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Libros{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h3>Nuevo libro</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ path('crearlibros') }}" method="POST">
+                            <div class="form-group">
+                                <select name="editoriales_id" id="editoriales_id" class="form-control" required>
+                                    <option value="">Seleccione una editorial</option>
+                                    {% for editorial in editoriales %}
+                                    <option value="{{ editorial.id }}">
+                                        {{ editorial.nombre }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group mt-2">
+                                <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Título"
+                                    required>
+                            </div>
+                            <div class="form-group mt-2">
+                                <input type="text" name="sinopsis" id="sinopsis" class="form-control"
+                                    placeholder="Sinopsis" required>
+                            </div>
+                            <div class="form-group mt-2">
+                                <input type="text" name="n_paginas" id="n_paginas" class="form-control"
+                                    placeholder="# páginas" required>
+                            </div>
+                            <div class="form-group mt-2">
+                                <button type="submit" class="btn btn-success">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h3>Listado de libros</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Editorial</th>
+                                    <th scope="col">Título</th>
+                                    <th scope="col">Sinopsis</th>
+                                    <th scope="col">#páginas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for libro in libros %}
+                                <tr>
+                                    <td>{{ libro.editoriales.id }}</td>
+                                    <td>{{ libro.titulo }}</td>
+                                    <td>{{ libro.sinopsin }}</td>
+                                    <td>{{ libro.npaginas }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
