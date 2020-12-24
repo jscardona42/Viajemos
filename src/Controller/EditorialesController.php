@@ -55,11 +55,5 @@ class EditorialesController extends AbstractController
         $response->headers->set('Content-Type', 'application/json');
     
         return $response;
-
-        $editoriales = $em->getRepository(Editoriales::class)->findAll();
-
-        return $this->render('editoriales/index.html.twig', [
-            'editoriales' => $editoriales
-        ]);
     }
 }
